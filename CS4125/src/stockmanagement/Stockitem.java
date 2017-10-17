@@ -1,7 +1,5 @@
 package stockmanagement;
 
-import java.util.ArrayList;
-
 public class Stockitem {
 
 	private String brand;
@@ -10,13 +8,13 @@ public class Stockitem {
 	private double price;
 	private int stock;
 	
-	public Stockitem(Item item)
+	public Stockitem(int artNr, String brand, String article, double price, int amount)
 	{
-		this.artNr=item.getArtNr();
-		this.brand=item.getBrand();
-		this.article=item.getArticle();
-		this.price=item.getPrice();
-		this.stock=1;
+		this.artNr=artNr;
+		this.brand=brand;
+		this.article=article;
+		this.price=price;
+		this.stock=amount;
 	}
 	
 	public void addItem(int amount)
@@ -29,21 +27,21 @@ public class Stockitem {
 		this.stock-=amount;
 	}
 	
-	public Item getItem()
+	public Stockitem getItem(int amount)
 	{
-		Item item = new Item(this.brand, this.article, this.artNr, this.price);
-		return item;
-	}
-	
-	public ArrayList<Item> getItem(int amount)
-	{
-		ArrayList<Item> templist = new ArrayList<Item>();
-		for(int i=0;i<amount;i++)
+		Stockitem item = null;
+		if(this.stock>=amount) 
 		{
-			Item item = new Item(this.brand, this.article, this.artNr, this.price);
-			templist.add(item);
+			item = new Stockitem(this.artNr, this.brand, this.article, this.price, amount);
+			this.stock-=amount;
 		}
-		return templist;
+		else
+		{
+			item = new Stockitem(this.artNr, this.brand, this.article, this.price, this.stock);
+			this.stock-=this.stock;
+			System.out.println("Item out of Stock");
+		}
+		return item;
 	}
 	
 	public int getNr()
@@ -51,9 +49,29 @@ public class Stockitem {
 		return this.artNr;
 	}
 	
+	public String getBrand()
+	{
+		return this.brand;
+	}
+	
+	public String getArticle()
+	{
+		return this.article;
+	}
+	
+	public double getPrice()
+	{
+		return this.price;
+	}
+	
 	public int getAmount()
 	{
 		return this.stock;
+	}
+	
+	public void setPrice(int price)
+	{
+		this.price=price;
 	}
 	
 }
