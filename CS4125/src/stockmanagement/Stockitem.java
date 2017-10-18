@@ -74,4 +74,13 @@ public class Stockitem {
 		this.price=price;
 	}
 	
+	public boolean isEqual(Stockitem item)
+	{
+		if(item.article==this.article && item.brand==this.brand)
+		{
+			return true;
+		}
+		return false;
+	}
+	
 }

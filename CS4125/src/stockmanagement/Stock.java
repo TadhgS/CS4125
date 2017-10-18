@@ -11,18 +11,21 @@ public class Stock {
 		this.stocklist = new HashMap<Integer, Stockitem>();
 	}
 	
-	public void addItem(int artNr, String brand, String article, double price, int amount)
+	public void registerItem(int artNr, String brand, String article, double price, int amount)
 	{
 		if(amount>=0)
 		{
 			if(this.stocklist.containsKey(artNr))
 			{
-				this.stocklist.get(artNr).addItem(amount);
+				System.err.println("ERROR: artNr is already in use");
 			}
 			else
 			{
 				Stockitem tempstock = new Stockitem(artNr, brand, article, price, amount);
-				this.stocklist.put(artNr, tempstock);
+				if(validateStock(tempstock))
+				{
+					this.stocklist.put(artNr,  tempstock);
+				}
 			}
 		}
 		else
@@ -92,6 +95,31 @@ public class Stock {
 		{
 			return this.stocklist.get(artNr).getItem(amount);
 		}
+	}
+	
+	public HashMap<Integer, Stockitem> getItemlist()
+	{
+		if(this.stocklist!=null)
+		{
+			return this.stocklist;
+		}
+		else
+		{
+			return null;
+		}
+	}
+	
+	private boolean validateStock(Stockitem item)
+	{
+		for(HashMap.Entry<Integer, Stockitem> temp : this.stocklist.entrySet())
+		{
+			if(temp.getValue().isEqual(item))
+			{
+				System.err.println("ERROR: Item already exists with artNr" + temp.getValue().getNr());
+				return false;
+			}
+		}
+		return true;
 	}
 	
 }
