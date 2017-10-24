@@ -22,26 +22,30 @@ public class Stockitem {
 		this.stock+=amount;
 	}
 	
-	public void removeItem(int amount)
+	public boolean removeItem(int amount)
 	{
-		this.stock-=amount;
-	}
-	
-	public Stockitem getItem(int amount)
-	{
-		Stockitem item = null;
-		if(this.stock>=amount) 
+		if(this.stock>=amount)
 		{
-			item = new Stockitem(this.artNr, this.brand, this.article, this.price, amount);
 			this.stock-=amount;
+			return true;
 		}
 		else
 		{
-			item = new Stockitem(this.artNr, this.brand, this.article, this.price, this.stock);
-			this.stock-=this.stock;
-			System.out.println("Item out of Stock");
+			return false;
 		}
-		return item;
+	}
+	
+	public boolean getItem(int amount)
+	{
+		if(this.stock>=amount)
+		{
+			this.stock-=amount;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	public int getNr()

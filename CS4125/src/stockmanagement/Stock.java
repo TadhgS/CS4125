@@ -85,17 +85,41 @@ public class Stock {
 	
 	public Stockitem getItem(int artNr, int amount)
 	{
-		Stockitem item = this.stocklist.get(artNr).getItem(amount);
-		if(item==null) 
+		if(this.stocklist.containsKey(artNr))
 		{
-			System.err.println("ERROR: Stock empty");
+			Stockitem item = this.stocklist.get(artNr);
+			if(item!=null)
+			{
+				if(item.getItem(amount)==true)
+				{
+					return new Stockitem(item.getNr(),item.getBrand(),item.getArticle(),item.getPrice(),amount);
+				}
+				else
+				{
+					int fullstock = item.getAmount();
+					System.err.println("ERROR: Item out of stock, returned " + fullstock + " items");
+					if(item.removeItem(fullstock)==true)
+					{
+						return new Stockitem(item.getNr(), item.getBrand(), item.getArticle(), item.getPrice(), fullstock);
+					}
+					else
+					{
+						System.err.println("ERROR: removing non existent items from Stockitem");
+						return null;
+					}
+				}
+			}
+			else
+			{
+				System.err.println("ERROR: item == null");
+				return null;
+			}
+		}
+		else
+		{
 			return null;
 		}
-		else 
-		{
-			return this.stocklist.get(artNr).getItem(amount);
-		}
-	}
+	}	
 	
 	public HashMap<Integer, Stockitem> getItemlist()
 	{
