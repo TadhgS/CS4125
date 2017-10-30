@@ -3,7 +3,7 @@ package staff;
 import java.util.ArrayList;
 
 public class Manager extends Staffmember {
-	Manager(){}// Default
+	Manager(){}// Default Constructor
 	Manager(String anID , String aUsername, String aPassword) {
 		super(anID , aUsername, aPassword);
 	}

@@ -4,7 +4,7 @@ public abstract class Staffmember {
 	private String ID;
 	private String username;
 	private String password;
-	// Default Constuctor
+	// Default Constructor
 	Staffmember(){}
 	Staffmember( String anID , String aUsername , String aPassword){
 		ID       = anID;
