@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import factory.Factory;
 import stockmanagement.Stock;
 import stockmanagement.Stockitem;
 
@@ -11,7 +12,8 @@ public class Teststock {
 
 	@Test
 	public void testStock() {
-		Stock myStock = new Stock();
+		Factory fact = Factory.getFactory();
+		Stock myStock = fact.getStock();
 		myStock.registerItem(0, "Testbrand", "Testarticle", 3.15, 5);
 		Stockitem myItem = myStock.getItem(0, 1);
 		
