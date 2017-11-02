@@ -1,9 +1,68 @@
 package userinterface;
 
-public class Gui {
+import java.io.FileNotFoundException;
 
-	public static void main(String[] args) {
+import javax.swing.JOptionPane;
+
+public class Gui 
+{
+	public static void main(String[] args) 
+	{
 		//add testcode here
 	}
+	public static void makeWindow(String name,int x) throws FileNotFoundException
+	{
+		if(x == 1)
+		{
+			employeeMenu(name);
+		}
+		else if(x == 2)
+		{
+			managerMenu(name);
+		}
+	}
+	
+	public static void managerMenu(String empName) throws FileNotFoundException
+    {
+        String managerName;
+        managerName = empName;
+        int x;
+        x = Integer.parseInt(JOptionPane.showInputDialog(null,"1: Make Sale \n 2: Log Out \n 3: Remove Employee \n 4: Add Stock","Welcome" + managerName, JOptionPane.PLAIN_MESSAGE));
+        switch (x) {
+            case 1:
+                //makeSale();  
+                break;
+                //logOut();
+            case 2:
+                break;
+                //removeEmployee();
+            case 3:
+                break;
+                //addStock();
+            case 4:
+                break;
+            default:
+                JOptionPane.showMessageDialog(null,"Invalid choice, Please enter 1 to make sale or 2 to log out, 3 to remove employee or 4 to add stock.");
+                break;
+        }
+    }
+    public static void employeeMenu(String empName) throws FileNotFoundException
+    {
+        String employeeName;
+        employeeName = empName;
+        int x;
+        x = Integer.parseInt(JOptionPane.showInputDialog(null,"1: Make Sale \n 2: Log Out","Welcome" + employeeName, JOptionPane.PLAIN_MESSAGE));
+        switch (x) {
+            case 1:
+                //makeSale();  
+                break;
+                //logOut();
+            case 2:
+                break;
+            default:
+                JOptionPane.showMessageDialog(null,"Invalid choice, Please enter 1 to make sale or 2 to log out");
+                break;
+        }
+    }
 	
 }
