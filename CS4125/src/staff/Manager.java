@@ -1,7 +1,7 @@
 package staff;
 
 public class Manager extends Staffmember {
-	Manager(){}// Default Constructor
+	public Manager(){}// Default Constructor
 	Manager(String anID , String aUsername, String aPassword) {
 		super(anID , aUsername, aPassword);
 	}
