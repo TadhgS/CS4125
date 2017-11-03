@@ -1,5 +1,5 @@
 package staff;
 
-public abstract class Staffmember {
+public interface Staffmember {
 
 }
