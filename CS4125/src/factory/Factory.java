@@ -30,7 +30,7 @@ public class Factory {
 		return Factory.factInstance;
 	}
 	
-	public Staffmember getStaff(String type)
+	public Staffmember createStaff(String type)
 	{
 		switch(type)
 		{
@@ -43,42 +43,42 @@ public class Factory {
 		}
 	}
 	
-	public Stockitem getItem(int artNr, String brand, String article, double price, int amount)
+	public Stockitem createItem(int artNr, String brand, String article, double price, int amount)
 	{
 		return new Stockitem(artNr, brand, article, price, amount);
 	}
 	
-	public Stock getStock()
+	public Stock createStock()
 	{
 		return Stock.getStockInstance();
 	}
 	
-	public Customer getCustomer()
+	public Customer createCustomer()
 	{
 		return new Customer();
 	}
 	
-	public Shoppingcart getShoppingCart()
+	public Shoppingcart createShoppingCart()
 	{
 		return new Shoppingcart();
 	}
 	
-	public Bill getBill()
+	public Bill createBill()
 	{
 		return new Bill();
 	}
 	
-	public Transaction getTransaction()
+	public Transaction createTransaction()
 	{
 		return new Transaction();
 	}
 	
-	public ShopScanner getScanner()
+	public ShopScanner createScanner()
 	{
 		return new ShopScanner();
 	}
 	
-	public Machinelearning getMachine()
+	public Machinelearning createMachine()
 	{
 		return new Machinelearning();
 	}

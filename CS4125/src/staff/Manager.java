@@ -1,5 +1,5 @@
 package staff;
 
-public class Manager extends Staffmember {
+public class Manager implements Staffmember {
 
 }

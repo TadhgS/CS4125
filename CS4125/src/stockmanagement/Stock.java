@@ -107,7 +107,7 @@ public class Stock {
 			{
 				if(item.getItem(amount)==true)
 				{
-					return fact.getItem(item.getNr(),item.getBrand(),item.getArticle(),item.getPrice(),amount);
+					return fact.createItem(item.getNr(),item.getBrand(),item.getArticle(),item.getPrice(),amount);
 				}
 				else
 				{
@@ -115,7 +115,7 @@ public class Stock {
 					System.err.println("ERROR: Item out of stock, returned " + fullstock + " items");
 					if(item.removeItem(fullstock)==true)
 					{
-						return fact.getItem(item.getNr(), item.getBrand(), item.getArticle(), item.getPrice(), fullstock);
+						return fact.createItem(item.getNr(), item.getBrand(), item.getArticle(), item.getPrice(), fullstock);
 					}
 					else
 					{

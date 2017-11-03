@@ -1,5 +1,5 @@
 package staff;
 
-public class Employee extends Staffmember {
+public class Employee implements Staffmember {
 
 }
