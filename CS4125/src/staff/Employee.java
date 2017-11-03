@@ -5,4 +5,6 @@ public class Employee extends Staffmember {
 	Employee(String anID , String aUsername, String aPassword) {
 		super(anID , aUsername, aPassword);
 	}
+	public void make_sale(){}
+	
 }

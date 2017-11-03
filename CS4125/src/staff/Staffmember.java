@@ -17,8 +17,8 @@ public abstract class Staffmember {
 	public String getUsername(){ return username; }
 	public String getPassword(){ return password; }
 	
-	// Update Stock
-	public void updateStock(){}
+	// View Stock
+	public void viewStock(){}
 	
 	// Account Actions
 	public void login(){}
