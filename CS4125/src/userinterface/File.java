@@ -25,7 +25,7 @@ public class File
 	
         if(FileType == 1)
         {
-            fileToParse = "loginDetail.txt";
+            fileToParse = "./src/userinterface/loginDetail.txt";
         }
         
         BufferedReader fileReader = null;
