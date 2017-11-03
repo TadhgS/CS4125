@@ -16,15 +16,5 @@ public class Store
     { 
         Login l = new Login();
         l.setVisible(true);
-    }
-    
-    public static void employee()
-    {
-        System.out.print("Hello employee");
-    }
-        
-    public static void manager()
-    {
-        System.out.print("Hello manager");
-    }       
+    }      
 }

@@ -7,6 +7,7 @@ package userinterface;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.FileNotFoundException;
 
 public class Login extends JFrame implements ActionListener
 {
@@ -65,14 +66,32 @@ public class Login extends JFrame implements ActionListener
                 {
                     setVisible(false);
                     //send to employee screen
-                    Store.employee();
+                    //Store.employee();
+                    try 
+                    {
+						Gui.employeeMenu(userName);
+					} 
+                    catch (FileNotFoundException e1) 
+                    {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
                 }
                 
                 if (Authentication.level == 2)
                 {
                     setVisible(false);
                     //send to manager screen
-                    Store.manager();
+                    //Store.manager();
+                    try 
+                    {
+						Gui.managerMenu(userName);
+					} 
+                    catch (FileNotFoundException e1)
+                    {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
                 }
             }
 	  }

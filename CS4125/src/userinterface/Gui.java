@@ -10,24 +10,13 @@ public class Gui
 	{
 		//add testcode here
 	}
-	public static void makeWindow(String name,int x) throws FileNotFoundException
-	{
-		if(x == 1)
-		{
-			employeeMenu(name);
-		}
-		else if(x == 2)
-		{
-			managerMenu(name);
-		}
-	}
 	
 	public static void managerMenu(String empName) throws FileNotFoundException
     {
         String managerName;
         managerName = empName;
         int x;
-        x = Integer.parseInt(JOptionPane.showInputDialog(null,"1: Make Sale \n 2: Log Out \n 3: Remove Employee \n 4: Add Stock","Welcome" + managerName, JOptionPane.PLAIN_MESSAGE));
+        x = Integer.parseInt(JOptionPane.showInputDialog(null,"1: Make Sale \n 2: Log Out \n 3: Remove Employee \n 4: Add Stock","Welcome " + managerName, JOptionPane.PLAIN_MESSAGE));
         switch (x) {
             case 1:
                 //makeSale();  
@@ -51,7 +40,7 @@ public class Gui
         String employeeName;
         employeeName = empName;
         int x;
-        x = Integer.parseInt(JOptionPane.showInputDialog(null,"1: Make Sale \n 2: Log Out","Welcome" + employeeName, JOptionPane.PLAIN_MESSAGE));
+        x = Integer.parseInt(JOptionPane.showInputDialog(null,"1: Make Sale \n 2: Log Out","Welcome " + employeeName, JOptionPane.PLAIN_MESSAGE));
         switch (x) {
             case 1:
                 //makeSale();  
