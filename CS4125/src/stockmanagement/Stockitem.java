@@ -80,7 +80,7 @@ public class Stockitem {
 	
 	public boolean isEqual(Stockitem item)
 	{
-		if(item.article==this.article && item.brand==this.brand)
+		if(item.article.equals(this.article) && item.brand.equals(this.brand))
 		{
 			return true;
 		}
