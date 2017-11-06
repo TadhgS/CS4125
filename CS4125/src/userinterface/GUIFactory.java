@@ -31,6 +31,8 @@ public class GUIFactory {
 			return new StockRemove();
 		case "registerItem":
 			return new StockRegister();
+		case "deleteItem":
+			return new StockDelete();
 		default:
 			return null;
 		}

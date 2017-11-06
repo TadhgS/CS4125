@@ -22,7 +22,6 @@ public class StockRegister implements StockChange{
 
 	@Override
 	public void updateStock() {
-		// TODO Auto-generated method stub
 		if(tf_price.getText()!="" && tf_amount.getText()!="" && tf_article.getText()!="" && tf_brand.getText()!="" && tf_artNr.getText()!="")
 		{
 			double price = Double.valueOf(tf_price.getText());
@@ -41,7 +40,6 @@ public class StockRegister implements StockChange{
 
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
-						// TODO Auto-generated method stub
 						switch(arg0.getActionCommand())
 						{
 						case "back":

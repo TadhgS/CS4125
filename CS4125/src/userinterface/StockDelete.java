@@ -4,85 +4,60 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Map;
 
 import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 import stockmanagement.Stock;
 import stockmanagement.Stockitem;
 
-public class StockRemove implements StockChange {
+public class StockDelete implements StockChange{
 	
 	private Stock stock;
 	private JFrame frame;
-	private JFormattedTextField amount;
-	private ArrayList<JRadioButton> buttonlist;
+	private ArrayList<JCheckBox> checklist;
 
 	@Override
 	public void updateStock() {
-		Stockitem item = stock.getItemlist().get(this.getSelected());
-		if((int)amount.getValue()>0 && this.getSelected()>=0 &&(int)amount.getValue()<=item.getAmount())
+		// TODO Auto-generated method stub
+		for(int artNr : getSelected())
 		{
-			stock.removeItem(this.getSelected(), (int)amount.getValue());
-			//TODO Refresh frame
-		}	
-		else
-		{
-			System.err.println("ERROR: ArtNr < 0 or added amount < 1");
+			stock.deleteItem(artNr);
 		}
 	}
 	
-	public StockRemove()
+	public StockDelete()
 	{
-		buttonlist = new ArrayList<JRadioButton>();
-		frame = new JFrame("Remove item");
+		checklist = new ArrayList<JCheckBox>();
+		frame = new JFrame("Delete item");
 		frame.setSize(256, 256);
 		frame.setVisible(true);
 		frame.setLayout(new BorderLayout());
 		JPanel mainpanel = new JPanel();
 		mainpanel.setLayout(new BoxLayout(mainpanel, BoxLayout.Y_AXIS));
 		this.stock = Stock.getStockInstance();
-		ButtonGroup group = new ButtonGroup();
-		for(Map.Entry<Integer,Stockitem> item : this.stock.getItemlist().entrySet())
-		{
-			JPanel panel = new JPanel();
-			panel.setLayout(new BorderLayout());
-			panel.add(getItemView(item.getValue()), BorderLayout.CENTER);
-			JRadioButton check = new JRadioButton();
-			check.setActionCommand(String.valueOf(item.getKey()));
-			buttonlist.add(check);
-			group.add(check);
-			panel.add(check, BorderLayout.LINE_END);
-			mainpanel.add(panel);
-		}
-		
-		JScrollPane scroll = new JScrollPane(mainpanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		frame.add(scroll, BorderLayout.CENTER);
-
 		
 		ActionListener listen = new ActionListener()
 				{
 
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
+						// TODO Auto-generated method stub
 						switch(arg0.getActionCommand())
 						{
 						case "back":
 							new StockMenu();
 							frame.dispose();
 							break;
-						case "remove":
+						case "delete":
 							updateStock();
 							break;
 						}
@@ -90,18 +65,29 @@ public class StockRemove implements StockChange {
 			
 				};
 		
+		for(Map.Entry<Integer,Stockitem> item : this.stock.getItemlist().entrySet())
+		{
+			JPanel panel = new JPanel();
+			panel.setLayout(new GridLayout(1,2));
+			panel.add(getItemView(item.getValue()));
+			JCheckBox check = new JCheckBox();
+			check.setActionCommand(String.valueOf(item.getKey()));
+			this.checklist.add(check);
+			panel.add(check);
+			mainpanel.add(panel);
+		}
+		JScrollPane scroll = new JScrollPane(mainpanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		frame.add(scroll, BorderLayout.CENTER);
 		JPanel menu = new JPanel();
-		menu.setLayout(new GridLayout(1,3));
+		menu.setLayout(new GridLayout(1,2));
 		JButton back = new JButton("back");
 		back.setActionCommand("back");
 		back.addActionListener(listen);
-		JButton add = new JButton("remove");
-		add.setActionCommand("remove");
-		add.addActionListener(listen);
-		amount = new JFormattedTextField(NumberFormat.INTEGER_FIELD);
+		JButton delete = new JButton("delete");
+		delete.setActionCommand("delete");
+		delete.addActionListener(listen);
 		menu.add(back);
-		menu.add(amount);
-		menu.add(add);
+		menu.add(delete);
 		frame.add(menu, BorderLayout.PAGE_END);
 	}
 	
@@ -142,16 +128,17 @@ public class StockRemove implements StockChange {
 		return itemview;
 	}
 	
-	private int getSelected()
+	private ArrayList<Integer> getSelected()
 	{
-		for(JRadioButton button : this.buttonlist)
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		for(JCheckBox box : this.checklist)
 		{
-			if(button.isSelected())
+			if(box.isSelected())
 			{
-				return Integer.valueOf(button.getActionCommand());
+				list.add(Integer.valueOf(box.getActionCommand()));
 			}
 		}
-		return -1;
+		return list;
 	}
-
+	
 }

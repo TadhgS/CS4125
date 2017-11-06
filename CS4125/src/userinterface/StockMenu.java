@@ -30,19 +30,23 @@ public class StockMenu {
 		this.frame.setSize(256, 128);
 		this.frame.setVisible(true);
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JButton addItem = new JButton("Add item");
-		addItem.addActionListener(this.stocklisten);
-		addItem.setActionCommand("addItem");
 		JButton registerItem = new JButton("Register item");
 		registerItem.addActionListener(this.stocklisten);
 		registerItem.setActionCommand("registerItem");
+		JButton addItem = new JButton("Add item");
+		addItem.addActionListener(this.stocklisten);
+		addItem.setActionCommand("addItem");
+		JButton deleteItem = new JButton("Delete item");
+		deleteItem.addActionListener(this.stocklisten);
+		deleteItem.setActionCommand("deleteItem");
 		JButton removeItem = new JButton("Remove item");
 		removeItem.addActionListener(this.stocklisten);
 		removeItem.setActionCommand("removeItem");
-		this.frame.setLayout(new GridLayout(3,1));
+		this.frame.setLayout(new GridLayout(4,1));
 		this.frame.add(registerItem);
 		this.frame.add(addItem);
 		this.frame.add(removeItem);
+		this.frame.add(deleteItem);
 	}
 	
 }
