@@ -33,6 +33,8 @@ public class GUIFactory {
 			return new StockRegister();
 		case "deleteItem":
 			return new StockDelete();
+		case "updateItem":
+			return new StockUpdate();
 		default:
 			return null;
 		}

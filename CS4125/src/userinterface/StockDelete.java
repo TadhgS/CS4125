@@ -24,28 +24,20 @@ public class StockDelete implements StockChange{
 	private Stock stock;
 	private JFrame frame;
 	private ArrayList<JCheckBox> checklist;
+	private ActionListener listen;
 
 	@Override
 	public void updateStock() {
-		// TODO Auto-generated method stub
 		for(int artNr : getSelected())
 		{
 			stock.deleteItem(artNr);
+			refresh();
 		}
 	}
 	
 	public StockDelete()
-	{
-		checklist = new ArrayList<JCheckBox>();
-		frame = new JFrame("Delete item");
-		frame.setSize(256, 256);
-		frame.setVisible(true);
-		frame.setLayout(new BorderLayout());
-		JPanel mainpanel = new JPanel();
-		mainpanel.setLayout(new BoxLayout(mainpanel, BoxLayout.Y_AXIS));
-		this.stock = Stock.getStockInstance();
-		
-		ActionListener listen = new ActionListener()
+	{		
+		listen = new ActionListener()
 				{
 
 					@Override
@@ -64,31 +56,8 @@ public class StockDelete implements StockChange{
 					}
 			
 				};
+			initializeDisplay();
 		
-		for(Map.Entry<Integer,Stockitem> item : this.stock.getItemlist().entrySet())
-		{
-			JPanel panel = new JPanel();
-			panel.setLayout(new GridLayout(1,2));
-			panel.add(getItemView(item.getValue()));
-			JCheckBox check = new JCheckBox();
-			check.setActionCommand(String.valueOf(item.getKey()));
-			this.checklist.add(check);
-			panel.add(check);
-			mainpanel.add(panel);
-		}
-		JScrollPane scroll = new JScrollPane(mainpanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		frame.add(scroll, BorderLayout.CENTER);
-		JPanel menu = new JPanel();
-		menu.setLayout(new GridLayout(1,2));
-		JButton back = new JButton("back");
-		back.setActionCommand("back");
-		back.addActionListener(listen);
-		JButton delete = new JButton("delete");
-		delete.setActionCommand("delete");
-		delete.addActionListener(listen);
-		menu.add(back);
-		menu.add(delete);
-		frame.add(menu, BorderLayout.PAGE_END);
 	}
 	
 	private JPanel getItemView(Stockitem item)
@@ -131,14 +100,67 @@ public class StockDelete implements StockChange{
 	private ArrayList<Integer> getSelected()
 	{
 		ArrayList<Integer> list = new ArrayList<Integer>();
-		for(JCheckBox box : this.checklist)
+		if(this.checklist!=null) 
 		{
-			if(box.isSelected())
+			for(JCheckBox box : this.checklist)
 			{
-				list.add(Integer.valueOf(box.getActionCommand()));
+				if(box.isSelected())
+				{
+					list.add(Integer.valueOf(box.getActionCommand()));
+				}
 			}
+			return list;
 		}
-		return list;
+		else
+		{
+			return null;
+		}
+	}
+
+	@Override
+	public void refresh() {
+		this.stock=Stock.getStockInstance();
+		initializeDisplay();
+	}
+
+	@Override
+	public void initializeDisplay() {
+		if(frame!=null)
+		{
+			frame.dispose();
+		}
+		this.checklist=new ArrayList<JCheckBox>();
+		frame = new JFrame("Delete item");
+		frame.setSize(256, 256);
+		frame.setVisible(true);
+		frame.setLayout(new BorderLayout());
+		JPanel mainpanel = new JPanel();
+		mainpanel.setLayout(new BoxLayout(mainpanel, BoxLayout.Y_AXIS));
+		this.stock = Stock.getStockInstance();
+		for(Map.Entry<Integer,Stockitem> item : this.stock.getItemlist().entrySet())
+		{
+			JPanel panel = new JPanel();
+			panel.setLayout(new GridLayout(1,2));
+			panel.add(getItemView(item.getValue()));
+			JCheckBox check = new JCheckBox();
+			check.setActionCommand(String.valueOf(item.getKey()));
+			this.checklist.add(check);
+			panel.add(check);
+			mainpanel.add(panel);
+		}
+		JScrollPane scroll = new JScrollPane(mainpanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		frame.add(scroll, BorderLayout.CENTER);
+		JPanel menu = new JPanel();
+		menu.setLayout(new GridLayout(1,2));
+		JButton back = new JButton("back");
+		back.setActionCommand("back");
+		back.addActionListener(listen);
+		JButton delete = new JButton("delete");
+		delete.setActionCommand("delete");
+		delete.addActionListener(listen);
+		menu.add(back);
+		menu.add(delete);
+		frame.add(menu, BorderLayout.PAGE_END);
 	}
 	
 }

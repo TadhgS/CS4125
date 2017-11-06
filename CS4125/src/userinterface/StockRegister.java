@@ -28,6 +28,7 @@ public class StockRegister implements StockChange{
 			String article=tf_article.getText(), brand=tf_brand.getText();
 			int artNr=Integer.valueOf(tf_artNr.getText()), amount=Integer.valueOf(tf_amount.getText());
 			stock.registerItem(artNr,brand,article,price,amount);
+			refresh();
 		}
 	}
 	
@@ -103,6 +104,18 @@ public class StockRegister implements StockChange{
 		itemview.add(amount1);
 		itemview.add(tf_amount);
 		return itemview;
+	}
+
+	@Override
+	public void refresh() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void initializeDisplay() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

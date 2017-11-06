@@ -28,6 +28,7 @@ public class StockRemove implements StockChange {
 	private JFrame frame;
 	private JFormattedTextField amount;
 	private ArrayList<JRadioButton> buttonlist;
+	private ActionListener listen;
 
 	@Override
 	public void updateStock() {
@@ -35,7 +36,7 @@ public class StockRemove implements StockChange {
 		if((int)amount.getValue()>0 && this.getSelected()>=0 &&(int)amount.getValue()<=item.getAmount())
 		{
 			stock.removeItem(this.getSelected(), (int)amount.getValue());
-			//TODO Refresh frame
+			refresh();
 		}	
 		else
 		{
@@ -46,32 +47,8 @@ public class StockRemove implements StockChange {
 	public StockRemove()
 	{
 		buttonlist = new ArrayList<JRadioButton>();
-		frame = new JFrame("Remove item");
-		frame.setSize(256, 256);
-		frame.setVisible(true);
-		frame.setLayout(new BorderLayout());
-		JPanel mainpanel = new JPanel();
-		mainpanel.setLayout(new BoxLayout(mainpanel, BoxLayout.Y_AXIS));
-		this.stock = Stock.getStockInstance();
-		ButtonGroup group = new ButtonGroup();
-		for(Map.Entry<Integer,Stockitem> item : this.stock.getItemlist().entrySet())
-		{
-			JPanel panel = new JPanel();
-			panel.setLayout(new BorderLayout());
-			panel.add(getItemView(item.getValue()), BorderLayout.CENTER);
-			JRadioButton check = new JRadioButton();
-			check.setActionCommand(String.valueOf(item.getKey()));
-			buttonlist.add(check);
-			group.add(check);
-			panel.add(check, BorderLayout.LINE_END);
-			mainpanel.add(panel);
-		}
-		
-		JScrollPane scroll = new JScrollPane(mainpanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		frame.add(scroll, BorderLayout.CENTER);
 
-		
-		ActionListener listen = new ActionListener()
+		listen = new ActionListener()
 				{
 
 					@Override
@@ -89,20 +66,8 @@ public class StockRemove implements StockChange {
 					}
 			
 				};
+		initializeDisplay();
 		
-		JPanel menu = new JPanel();
-		menu.setLayout(new GridLayout(1,3));
-		JButton back = new JButton("back");
-		back.setActionCommand("back");
-		back.addActionListener(listen);
-		JButton add = new JButton("remove");
-		add.setActionCommand("remove");
-		add.addActionListener(listen);
-		amount = new JFormattedTextField(NumberFormat.INTEGER_FIELD);
-		menu.add(back);
-		menu.add(amount);
-		menu.add(add);
-		frame.add(menu, BorderLayout.PAGE_END);
 	}
 	
 	private JPanel getItemView(Stockitem item)
@@ -152,6 +117,59 @@ public class StockRemove implements StockChange {
 			}
 		}
 		return -1;
+	}
+
+	@Override
+	public void refresh() {
+		this.stock =  Stock.getStockInstance();
+		initializeDisplay();
+	}
+
+	@Override
+	public void initializeDisplay() {
+		if(frame!=null)
+		{
+			frame.dispose();
+		}
+		buttonlist = new ArrayList<JRadioButton>();
+		frame = new JFrame("Remove item");
+		frame.setSize(256, 256);
+		frame.setVisible(true);
+		frame.setLayout(new BorderLayout());
+		JPanel mainpanel = new JPanel();
+		mainpanel.setLayout(new BoxLayout(mainpanel, BoxLayout.Y_AXIS));
+		this.stock = Stock.getStockInstance();
+		ButtonGroup group = new ButtonGroup();
+		for(Map.Entry<Integer,Stockitem> item : this.stock.getItemlist().entrySet())
+		{
+			JPanel panel = new JPanel();
+			panel.setLayout(new BorderLayout());
+			panel.add(getItemView(item.getValue()), BorderLayout.CENTER);
+			JRadioButton check = new JRadioButton();
+			check.setActionCommand(String.valueOf(item.getKey()));
+			buttonlist.add(check);
+			group.add(check);
+			panel.add(check, BorderLayout.LINE_END);
+			mainpanel.add(panel);
+		}
+		
+		JScrollPane scroll = new JScrollPane(mainpanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		frame.add(scroll, BorderLayout.CENTER);
+		
+		JPanel menu = new JPanel();
+		menu.setLayout(new GridLayout(1,3));
+		JButton back = new JButton("back");
+		back.setActionCommand("back");
+		back.addActionListener(listen);
+		JButton add = new JButton("remove");
+		add.setActionCommand("remove");
+		add.addActionListener(listen);
+		amount = new JFormattedTextField(NumberFormat.INTEGER_FIELD);
+		menu.add(back);
+		menu.add(amount);
+		menu.add(add);
+		frame.add(menu, BorderLayout.PAGE_END);
+		
 	}
 
 }

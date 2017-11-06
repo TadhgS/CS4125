@@ -42,6 +42,9 @@ public class StockMenu {
 		JButton removeItem = new JButton("Remove item");
 		removeItem.addActionListener(this.stocklisten);
 		removeItem.setActionCommand("removeItem");
+		JButton updateItem = new JButton("Update item");
+		updateItem.setActionCommand("updateItem");
+		updateItem.addActionListener(this.stocklisten);
 		this.frame.setLayout(new GridLayout(4,1));
 		this.frame.add(registerItem);
 		this.frame.add(addItem);
