@@ -148,6 +148,11 @@ public class Stock {
 		}
 	}
 	
+	public Stockitem getItem(int artNr)
+	{
+		return this.stocklist.get(artNr);
+	}
+	
 	private boolean validateStock(Stockitem item)
 	{
 		for(HashMap.Entry<Integer, Stockitem> temp : this.stocklist.entrySet())

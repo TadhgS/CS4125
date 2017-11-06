@@ -2,6 +2,7 @@ package userinterface;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Map;
@@ -25,11 +26,41 @@ public class StockUpdate implements StockChange {
 	private JFrame frame;
 	private ArrayList<JRadioButton> buttonlist;
 	private ActionListener listen;
+	private Stockitem item;
+	
+	public StockUpdate()
+	{
+		listen = new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				switch(arg0.getActionCommand())
+				{
+				case "back":
+					new StockMenu();
+					frame.dispose();
+					break;
+				case "add":
+					updateStock();
+					break;
+				}
+			}
+		};
+		initializeDisplay();
+	}
 
 	@Override
 	public void updateStock() {
-		//TODO Update item
-		refresh();
+		getSelected();
+		if(item==null)
+		{
+			System.err.println("ERROR: Item not found");
+		}
+		else
+		{
+			GUIFactory.createGUIFactory().createStockEditor(item);
+			frame.dispose();
+		}
 	}
 
 	@Override
@@ -118,6 +149,17 @@ public class StockUpdate implements StockChange {
 		itemview.add(amount1);
 		itemview.add(amount2);
 		return itemview;
+	}
+	
+	private void getSelected()
+	{
+		for(JRadioButton button : this.buttonlist)
+		{
+			if(button.isSelected())
+			{
+				this.stock.getItem(Integer.valueOf(button.getActionCommand()));
+			}
+		}
 	}
 
 }

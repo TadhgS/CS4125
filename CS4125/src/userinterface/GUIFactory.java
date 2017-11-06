@@ -1,5 +1,7 @@
 package userinterface;
 
+import stockmanagement.Stockitem;
+
 public class GUIFactory {
 
 	public static GUIFactory factInstance;
@@ -38,6 +40,11 @@ public class GUIFactory {
 		default:
 			return null;
 		}
+	}
+	
+	public StockEditor createStockEditor(Stockitem item)
+	{
+		return new StockEditor(item);
 	}
 	
 }
