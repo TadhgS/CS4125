@@ -11,7 +11,11 @@ import java.io.FileNotFoundException;
 
 public class Login extends JFrame implements ActionListener
 {
-    private static boolean security;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private static boolean security;
     private JButton loginButton;
     private JTextField userText;
     private JPasswordField passwordText;
