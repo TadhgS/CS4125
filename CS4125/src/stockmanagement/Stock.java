@@ -148,6 +148,39 @@ public class Stock {
 		}
 	}
 	
+	public Stockitem getItem(int artNr)
+	{
+		return this.stocklist.get(artNr);
+	}
+	
+	public void updateItem(int artNr_old, int artNr, int amount, double price, String article, String brand)
+	{
+		Stockitem item = this.stocklist.get(artNr_old);
+		if(item!=null)
+		{
+			if(artNr_old==artNr)
+			{
+				item.setValues(amount, price, article, brand);
+			}
+			else
+			{
+				if(this.stocklist.containsKey(artNr))
+				{
+					System.err.println("ERROR: Article Number not Valid");
+				}
+				else
+				{
+					this.stocklist.remove(artNr_old);
+					this.registerItem(artNr, brand, article, price, amount);
+				}
+			}
+		}
+		else
+		{
+			System.err.println("ERROR: Item not found");
+		}
+	}
+	
 	private boolean validateStock(Stockitem item)
 	{
 		for(HashMap.Entry<Integer, Stockitem> temp : this.stocklist.entrySet())
