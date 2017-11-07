@@ -87,4 +87,12 @@ public class Stockitem {
 		return false;
 	}
 	
+	public void setValues(int amount, double price, String article, String brand)
+	{
+		this.stock=amount;
+		this.price=price;
+		this.article=article;
+		this.brand=brand;
+	}
+	
 }

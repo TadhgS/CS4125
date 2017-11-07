@@ -12,15 +12,21 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import stockmanagement.Stock;
 import stockmanagement.Stockitem;
 
 public class StockEditor 
 {
 
 	private JFrame frame;
+	private JFormattedTextField tf_artNr, tf_price, tf_amount, tf_article, tf_brand;
+	private Stock stock;
+	private int artNr_old;
 	
 	public StockEditor(Stockitem item)
 	{
+		stock = Stock.getStockInstance();
+		artNr_old = item.getNr();
 		ActionListener listen = new ActionListener()
 				{
 
@@ -29,8 +35,8 @@ public class StockEditor
 						switch(e.getActionCommand())
 						{
 						case "back":
+							GUIFactory.createGUIFactory().createStockChange("updateItem");
 							frame.dispose();
-							GUIFactory.factInstance.createStockChange("updateItem");
 							break;
 						case "confirm":
 							updateStock();
@@ -41,6 +47,7 @@ public class StockEditor
 			
 				};
 		frame = new JFrame();
+		frame.setSize(256, 256);
 		frame.setLayout(new BorderLayout());
 		JPanel mainpanel = new JPanel();
 		mainpanel.setLayout(new GridLayout(5,2));
@@ -49,11 +56,16 @@ public class StockEditor
 		JLabel brand = new JLabel("Brand:");
 		JLabel price = new JLabel("Price:");
 		JLabel amount = new JLabel("Amount:");
-		JFormattedTextField tf_artNr = new JFormattedTextField(NumberFormat.INTEGER_FIELD);
-		JFormattedTextField tf_article = new JFormattedTextField();
-		JFormattedTextField tf_brand = new JFormattedTextField();
-		JFormattedTextField tf_price = new JFormattedTextField(NumberFormat.FRACTION_FIELD);
-		JFormattedTextField tf_amount = new JFormattedTextField(NumberFormat.INTEGER_FIELD);
+		tf_artNr = new JFormattedTextField(NumberFormat.INTEGER_FIELD);
+		tf_article = new JFormattedTextField();
+		tf_brand = new JFormattedTextField();
+		tf_price = new JFormattedTextField(NumberFormat.FRACTION_FIELD);
+		tf_amount = new JFormattedTextField(NumberFormat.INTEGER_FIELD);
+		tf_artNr.setText(String.valueOf(item.getNr()));
+		tf_article.setText(item.getArticle());
+		tf_brand.setText(item.getBrand());
+		tf_price.setText(String.valueOf(item.getPrice()));
+		tf_amount.setText(String.valueOf(item.getAmount()));
 		mainpanel.add(artNr);
 		mainpanel.add(tf_artNr);
 		mainpanel.add(article);
@@ -67,10 +79,10 @@ public class StockEditor
 		frame.add(mainpanel, BorderLayout.CENTER);
 		JPanel menupanel = new JPanel();
 		menupanel.setLayout(new GridLayout(1,2));
-		JButton back = new JButton();
+		JButton back = new JButton("back");
 		back.addActionListener(listen);
 		back.setActionCommand("back");
-		JButton confirm = new JButton();
+		JButton confirm = new JButton("confirm");
 		confirm.addActionListener(listen);
 		confirm.setActionCommand("confirm");
 		menupanel.add(back);
@@ -81,6 +93,12 @@ public class StockEditor
 	
 	public void updateStock()
 	{
+		int artNr =Integer.valueOf(tf_artNr.getText());
+		int amount = Integer.valueOf(tf_amount.getText());
+		double price = Double.valueOf(tf_price.getText());
+		String article = tf_article.getText();
+		String brand = tf_brand.getText();
+		this.stock.updateItem(artNr_old, artNr, amount, price, article, brand);
 		frame.dispose();
 		GUIFactory.createGUIFactory().createStockChange("updateItem");
 	}

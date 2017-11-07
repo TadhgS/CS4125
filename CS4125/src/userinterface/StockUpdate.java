@@ -40,7 +40,7 @@ public class StockUpdate implements StockChange {
 					new StockMenu();
 					frame.dispose();
 					break;
-				case "add":
+				case "update":
 					updateStock();
 					break;
 				}
@@ -157,7 +157,7 @@ public class StockUpdate implements StockChange {
 		{
 			if(button.isSelected())
 			{
-				this.stock.getItem(Integer.valueOf(button.getActionCommand()));
+				this.item = this.stock.getItem(Integer.valueOf(button.getActionCommand()));
 			}
 		}
 	}
