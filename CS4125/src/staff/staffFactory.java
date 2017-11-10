@@ -1,0 +1,14 @@
+package staff;
+
+public class staffFactory {
+	
+	public Staffmember createStaff(String type){
+		if(type == "Employee"){
+			return new Employee();
+		}else if(type == "Manager"){
+			return new Manager();
+		}else {
+			return null;
+		}
+	}
+}
