@@ -1,25 +1,17 @@
 package staff;
 
-<<<<<<< HEAD
-=======
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
->>>>>>> refs/remotes/origin/ManagerMenu
 public class Manager extends Staffmember {
-<<<<<<< HEAD
-	public Manager(){}// Default Constructor
-	Manager(String anID , String aUsername, String aPassword) {
-		super(anID , aUsername, aPassword);
-=======
 	private ArrayList<Staffmember> staff;
 	public Manager(){}// Default Constructor
 	Manager(String aUsername, String aPassword) {
 		super(aUsername, aPassword);
 		staff = new ArrayList<Staffmember>();
->>>>>>> refs/remotes/origin/ManagerMenu
 	}
 	
 	// Employee Management
