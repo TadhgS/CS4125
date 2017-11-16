@@ -1,5 +1,6 @@
 package scanner;
 
-public class ShopScanner {
-
+public class ShopScanner
+{
+	
 }
