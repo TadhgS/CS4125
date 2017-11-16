@@ -23,9 +23,12 @@ public class File
         ArrayList<String> myList = new ArrayList<>();
         String fileToParse = "";
 	
-        if(FileType == 1)
+        switch(FileType)
         {
-            fileToParse = "./src/userinterface/loginDetail.txt";
+        	case 1: fileToParse = "./src/userinterface/loginDetail.txt";
+        		break;
+        	case 2: fileToParse = "./src/userinterface/customerDetail.txt";
+        		break;
         }
         
         BufferedReader fileReader = null;
