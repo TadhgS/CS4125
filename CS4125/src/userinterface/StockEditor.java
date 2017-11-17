@@ -12,8 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import stockmanagement.Item;
 import stockmanagement.Stock;
-import stockmanagement.Stockitem;
 
 public class StockEditor 
 {
@@ -23,7 +23,7 @@ public class StockEditor
 	private Stock stock;
 	private int artNr_old;
 	
-	public StockEditor(Stockitem item)
+	public StockEditor(Item item)
 	{
 		stock = Stock.getStockInstance();
 		artNr_old = item.getNr();

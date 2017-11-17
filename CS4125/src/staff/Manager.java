@@ -16,7 +16,6 @@ public class Manager extends Staffmember {
 	
 	// Employee Management
 	public void add_Employee(Employee anEmployee){
-		boolean success = false;
 		load_file();
 	}
 	public void remove_Employee(Employee anEmployee){
