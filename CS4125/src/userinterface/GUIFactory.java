@@ -1,6 +1,6 @@
 package userinterface;
 
-import stockmanagement.Stockitem;
+import stockmanagement.Item;
 
 public class GUIFactory {
 
@@ -42,7 +42,7 @@ public class GUIFactory {
 		}
 	}
 	
-	public StockEditor createStockEditor(Stockitem item)
+	public StockEditor createStockEditor(Item item)
 	{
 		return new StockEditor(item);
 	}

@@ -2,19 +2,17 @@ package stockmanagement;
 
 import java.util.HashMap;
 
-import factory.Factory;
-
 public class Stock {
 	
 	private static Stock stockInstance;
-	private Factory fact;
+	private StockFactory fact;
 
-	private HashMap<Integer, Stockitem> stocklist;
+	private HashMap<Integer, Item> stocklist;
 	
 	private Stock()
 	{
-		fact = Factory.getFactory();
-		this.stocklist = new HashMap<Integer, Stockitem>();
+		fact = StockFactory.getStockFactory();
+		this.stocklist = new HashMap<Integer, Item>();
 	}
 	
 	public static synchronized Stock getStockInstance()
@@ -52,7 +50,7 @@ public class Stock {
 	public void addItem(int artNr, int amount)
 	{
 		if(this.stocklist.containsKey(artNr)) {
-			Stockitem item = this.stocklist.get(artNr);
+			Item item = this.stocklist.get(artNr);
 			if(amount>0) {
 				item.addItem(amount);
 			}
@@ -73,7 +71,7 @@ public class Stock {
 		{
 			if(this.stocklist.containsKey(artNr))
 			{
-				Stockitem tempstockitem = this.stocklist.get(artNr);
+				Item tempstockitem = this.stocklist.get(artNr);
 				if(tempstockitem.getAmount()>=amount)
 				{
 					tempstockitem.removeItem(amount);
@@ -98,11 +96,11 @@ public class Stock {
 		}
 	}
 	
-	public Stockitem getItem(int artNr, int amount)
+	public Item getItem(int artNr, int amount)
 	{
 		if(this.stocklist.containsKey(artNr))
 		{
-			Stockitem item = this.stocklist.get(artNr);
+			Item item = this.stocklist.get(artNr);
 			if(item!=null)
 			{
 				if(item.getItem(amount)==true)
@@ -111,11 +109,11 @@ public class Stock {
 				}
 				else
 				{
-					int fullstock = item.getAmount();
+					double fullstock = item.getAmount();
 					System.err.println("ERROR: Item out of stock, returned " + fullstock + " items");
-					if(item.removeItem(fullstock)==true)
+					if(item.removeItem((int)fullstock)==true)
 					{
-						return fact.createItem(item.getNr(), item.getBrand(), item.getArticle(), item.getPrice(), fullstock);
+						return fact.createItem(item.getNr(), item.getBrand(), item.getArticle(), item.getPrice(), (int)fullstock);
 					}
 					else
 					{
@@ -136,7 +134,7 @@ public class Stock {
 		}
 	}	
 	
-	public HashMap<Integer, Stockitem> getItemlist()
+	public HashMap<Integer, Item> getItemlist()
 	{
 		if(this.stocklist!=null)
 		{
@@ -148,14 +146,14 @@ public class Stock {
 		}
 	}
 	
-	public Stockitem getItem(int artNr)
+	public Item getItem(int artNr)
 	{
 		return this.stocklist.get(artNr);
 	}
 	
 	public void updateItem(int artNr_old, int artNr, int amount, double price, String article, String brand)
 	{
-		Stockitem item = this.stocklist.get(artNr_old);
+		Item item = this.stocklist.get(artNr_old);
 		if(item!=null)
 		{
 			if(artNr_old==artNr)
@@ -181,9 +179,9 @@ public class Stock {
 		}
 	}
 	
-	private boolean validateStock(Stockitem item)
+	private boolean validateStock(Item item)
 	{
-		for(HashMap.Entry<Integer, Stockitem> temp : this.stocklist.entrySet())
+		for(HashMap.Entry<Integer, Item> temp : this.stocklist.entrySet())
 		{
 			if(temp.getValue().isEqual(item))
 			{
@@ -192,6 +190,26 @@ public class Stock {
 			}
 		}
 		return true;
+	}
+	
+	public void addDiscount(int artNr, String discount, double value)
+	{
+		Item item = this.stocklist.get(artNr);
+		if(item!=null)
+		{
+			Item tempitem = this.fact.createDiscount(item, discount, value);
+			this.stocklist.replace(artNr, tempitem);
+		}
+	}
+	
+	public void removeDiscount(int artNr)
+	{
+		Item item = this.stocklist.get(artNr);
+		if(item!=null)
+		{
+			Item tempitem = this.fact.createItem(item.getNr(), item.getBrand(),  item.getArticle(),  item.getPrice(), (int)item.getAmount());
+			this.stocklist.replace(artNr, tempitem);
+		}
 	}
 	
 }

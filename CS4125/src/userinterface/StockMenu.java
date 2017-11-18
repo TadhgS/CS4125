@@ -20,8 +20,15 @@ public class StockMenu {
 			@Override
 			public void actionPerformed(ActionEvent arg0) 
 			{
+				if(arg0.getActionCommand()=="back")
+				{
+					//return to previous frame
+				}
+				else
+				{
+					fact.createStockChange(arg0.getActionCommand());
+				}
 				frame.dispose();
-				fact.createStockChange(arg0.getActionCommand());
 			}
 			
 		};
@@ -45,12 +52,16 @@ public class StockMenu {
 		JButton updateItem = new JButton("Update item");
 		updateItem.setActionCommand("updateItem");
 		updateItem.addActionListener(this.stocklisten);
-		this.frame.setLayout(new GridLayout(5,1));
+		JButton back = new JButton("Back");
+		back.setActionCommand("back");
+		back.addActionListener(this.stocklisten);
+		this.frame.setLayout(new GridLayout(6,1));
 		this.frame.add(registerItem);
 		this.frame.add(addItem);
 		this.frame.add(removeItem);
 		this.frame.add(updateItem);
 		this.frame.add(deleteItem);
+		this.frame.add(back);
 	}
 	
 }

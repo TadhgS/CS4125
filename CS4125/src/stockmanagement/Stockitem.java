@@ -1,6 +1,6 @@
 package stockmanagement;
 
-public class Stockitem {
+public class Stockitem implements Item{
 
 	private String brand;
 	private String article;
@@ -17,11 +17,13 @@ public class Stockitem {
 		this.stock=amount;
 	}
 	
+	@Override
 	public void addItem(int amount)
 	{
 		this.stock+=amount;
 	}
 	
+	@Override
 	public boolean removeItem(int amount)
 	{
 		if(this.stock>=amount)
@@ -35,6 +37,7 @@ public class Stockitem {
 		}
 	}
 	
+	@Override
 	public boolean getItem(int amount)
 	{
 		if(this.stock>=amount)
@@ -48,45 +51,53 @@ public class Stockitem {
 		}
 	}
 	
+	@Override
 	public int getNr()
 	{
 		return this.artNr;
 	}
 	
+	@Override
 	public String getBrand()
 	{
 		return this.brand;
 	}
 	
+	@Override
 	public String getArticle()
 	{
 		return this.article;
 	}
 	
+	@Override
 	public double getPrice()
 	{
 		return this.price;
 	}
 	
-	public int getAmount()
+	@Override
+	public double getAmount()
 	{
 		return this.stock;
 	}
 	
-	public void setPrice(int price)
+	@Override
+	public void setPrice(double price)
 	{
 		this.price=price;
 	}
 	
-	public boolean isEqual(Stockitem item)
+	@Override
+	public boolean isEqual(Item item)
 	{
-		if(item.article.equals(this.article) && item.brand.equals(this.brand))
+		if(this.article.equals(item.getArticle()) && this.brand.equals(item.getBrand()))
 		{
 			return true;
 		}
 		return false;
 	}
 	
+	@Override
 	public void setValues(int amount, double price, String article, String brand)
 	{
 		this.stock=amount;
@@ -94,5 +105,5 @@ public class Stockitem {
 		this.article=article;
 		this.brand=brand;
 	}
-	
+
 }

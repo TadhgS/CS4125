@@ -4,18 +4,19 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import factory.Factory;
+import stockmanagement.Item;
 import stockmanagement.Stock;
+import stockmanagement.StockFactory;
 import stockmanagement.Stockitem;
 
 public class Teststock {
 
 	@Test
 	public void testStock() {
-		Factory fact = Factory.getFactory();
+		StockFactory fact = StockFactory.getStockFactory();
 		Stock myStock = fact.createStock();
 		myStock.registerItem(0, "Testbrand", "Testarticle", 3.15, 5);
-		Stockitem myItem = myStock.getItem(0, 1);
+		Item myItem = myStock.getItem(0, 1);
 		
 		assertTrue(myItem!=null);
 		assertTrue(myStock.getItem(0, 1).getClass()==Stockitem.class);
@@ -27,7 +28,7 @@ public class Teststock {
 		assertTrue(myItem.getPrice()==3.15);
 		assertFalse(myItem.getItem(5));
 		
-		Stockitem myItem2 = myStock.getItem(0, 5);
+		Item myItem2 = myStock.getItem(0, 5);
 		
 		assertTrue(myItem2!=null && myItem2.getAmount()==3);
 	}

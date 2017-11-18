@@ -19,8 +19,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
+import stockmanagement.Item;
 import stockmanagement.Stock;
-import stockmanagement.Stockitem;
 
 public class StockAdd implements StockChange{
 	
@@ -64,7 +64,7 @@ public class StockAdd implements StockChange{
 			this.initializeDisplay();
 	}
 	
-	private JPanel getItemView(Stockitem item)
+	private JPanel getItemView(Item item)
 	{
 		JPanel itemview = new JPanel();
 		itemview.setLayout(new GridLayout(5,2));
@@ -134,7 +134,7 @@ public class StockAdd implements StockChange{
 		mainpanel.setLayout(new BoxLayout(mainpanel, BoxLayout.Y_AXIS));
 		this.stock = Stock.getStockInstance();
 		ButtonGroup group = new ButtonGroup();
-		for(Map.Entry<Integer,Stockitem> item : this.stock.getItemlist().entrySet())
+		for(Map.Entry<Integer,Item> item : this.stock.getItemlist().entrySet())
 		{
 			JPanel panel = new JPanel();
 			panel.setLayout(new BorderLayout());

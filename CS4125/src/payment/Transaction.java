@@ -7,7 +7,7 @@ import customer.Customer;
 
 public class Transaction extends JFrame implements ActionListener
 {
-	//private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	private JButton customerIDButton;
 	private JTextField userText;
 	private String customerID = "";
