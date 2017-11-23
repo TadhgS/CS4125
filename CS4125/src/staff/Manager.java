@@ -38,7 +38,7 @@ public class Manager extends Staffmember {
 			while( (text = bf.readLine()) != null){
 				String tempArr[] = text.split(",");
 				
-				staffFactory f = new staffFactory();
+				staffFactory f = staffFactory.getStaffFactory();
 				Staffmember temp;
 				if(tempArr[1]=="1"){
 				temp = f.createStaff("Employee");}
