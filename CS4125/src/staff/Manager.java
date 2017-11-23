@@ -8,18 +8,41 @@ import java.util.ArrayList;
 
 public class Manager extends Staffmember {
 	private ArrayList<Staffmember> staff;
-	public Manager(){}// Default Constructor
+	public Manager(){
+		staff = new ArrayList<Staffmember>();
+	}// Default Constructor
 	Manager(String aUsername, String aPassword) {
 		super(aUsername, aPassword);
 		staff = new ArrayList<Staffmember>();
 	}
 	
 	// Employee Management
-	public void add_Employee(Employee anEmployee){
+	public boolean add_Employee(Employee anEmployee){
+		boolean success = true;
 		load_file();
+		for(Staffmember s: staff){
+			if(s.getUsername().matches(anEmployee.getUsername())){
+				if(s.getPassword().matches(anEmployee.getUsername()))
+					success = false;
+			}
+		}
+		if(success){
+			staff.add(anEmployee);
+		}
+		return success;
 	}
-	public void remove_Employee(Employee anEmployee){
+	public boolean remove_Employee(Employee anEmployee){
 		load_file();
+		boolean found = false;
+		for(Staffmember s: staff){
+			if(s.getUsername().matches(anEmployee.getUsername())){
+				if(s.getPassword().matches(anEmployee.getUsername()))
+					staff.remove(s);
+				found = true;
+			}
+		}
+		return true;
+	
 	}
 	public void view_Employees(){
 		load_file();
@@ -33,7 +56,7 @@ public class Manager extends Staffmember {
 	private void load_file(){
 		String text = "";
 		try {
-			FileReader aFile = new FileReader("./userinterface/loginDetail.txt");
+			FileReader aFile = new FileReader("src./userinterface/loginDetail.txt");
 			BufferedReader bf = new BufferedReader(aFile);
 			while( (text = bf.readLine()) != null){
 				String tempArr[] = text.split(",");
@@ -45,8 +68,10 @@ public class Manager extends Staffmember {
 				else{
 				temp = f.createStaff("Manger");
 				}
+				if(temp!=null){
 				temp.setValues(tempArr[0],tempArr[2]);
 				staff.add(temp);
+				}
 			}
 			bf.close();
 		} catch (IOException e) {
