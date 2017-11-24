@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import customer.Customer;
+import customer.Shoppingcart;
 
 public class Transaction extends JFrame implements ActionListener
 {
@@ -46,13 +47,21 @@ public class Transaction extends JFrame implements ActionListener
             {
             	case -1: JOptionPane.showMessageDialog(null, "No ID exists");//call to make random customer ID
             		break;
-            	case 0: JOptionPane.showMessageDialog(null, "Not enough has been spent for a discount");
+            	case 0: //JOptionPane.showMessageDialog(null, "Not enough has been spent for a discount");
+            		Shoppingcart cart = new Shoppingcart();
+            		Bill finalBill = new Bill(cart);
         			break;
             	case 1: //set discount to 10%
+            		Shoppingcart cart1 = new Shoppingcart();
+            		Bill finalBill1 = new Bill(cart1);
         			break;
             	case 2: //set discount to 15%
+            		Shoppingcart cart2 = new Shoppingcart();
+            		Bill finalBill2 = new Bill(cart2);
         			break;
             	case 3: //set discount to 20%
+            		Shoppingcart cart3 = new Shoppingcart();
+            		Bill finalBill3 = new Bill(cart3);
             		break;
             }
         }
