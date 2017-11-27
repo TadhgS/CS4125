@@ -32,7 +32,7 @@ public class Gui
             	new StockMenu();
                 break;
             default:
-                JOptionPane.showMessageDialog(null,"Invalid choice, Please enter 1 to make sale or 2 to log out, 3 to remove employee or 4 to add stock.");
+                JOptionPane.showMessageDialog(null,"Invalid choice, Please enter 1 to make sale or 2 to log out, 3 to manage employees or 4 to add stock.");
                 break;
         }
     }
