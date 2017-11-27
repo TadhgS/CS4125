@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 
 import javax.swing.JOptionPane;
 
+import payment.Transaction;
+
 public class Gui 
 {
 	public static void main(String[] args) 
@@ -19,7 +21,7 @@ public class Gui
         x = Integer.parseInt(JOptionPane.showInputDialog(null,"1: Make Sale \n 2: Log Out \n 3: Manage Employees \n 4: Add Stock","Welcome " + managerName, JOptionPane.PLAIN_MESSAGE));
         switch (x) {
             case 1:
-                //makeSale();  
+                Transaction t = new Transaction();  
                 break;
                 //logOut();
             case 2:
@@ -44,7 +46,7 @@ public class Gui
         x = Integer.parseInt(JOptionPane.showInputDialog(null,"1: Make Sale \n 2: Log Out","Welcome " + employeeName, JOptionPane.PLAIN_MESSAGE));
         switch (x) {
             case 1:
-                //makeSale();  
+                Transaction t = new Transaction();   
                 break;
                 //logOut();
             case 2:
