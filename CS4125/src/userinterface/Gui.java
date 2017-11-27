@@ -16,7 +16,7 @@ public class Gui
         String managerName;
         managerName = empName;
         int x;
-        x = Integer.parseInt(JOptionPane.showInputDialog(null,"1: Make Sale \n 2: Log Out \n 3: Remove Employee \n 4: Add Stock","Welcome " + managerName, JOptionPane.PLAIN_MESSAGE));
+        x = Integer.parseInt(JOptionPane.showInputDialog(null,"1: Make Sale \n 2: Log Out \n 3: Manage Employees \n 4: Add Stock","Welcome " + managerName, JOptionPane.PLAIN_MESSAGE));
         switch (x) {
             case 1:
                 //makeSale();  
