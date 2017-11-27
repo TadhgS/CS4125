@@ -1,6 +1,6 @@
 package staff;
 
-import stockmanagement.StockFactory;
+
 
 public class staffFactory {
 	public static staffFactory staffInstance;

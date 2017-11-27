@@ -41,7 +41,7 @@ public class Manager extends Staffmember {
 				found = true;
 			}
 		}
-		return true;
+		return found;
 	
 	}
 	public void view_Employees(){

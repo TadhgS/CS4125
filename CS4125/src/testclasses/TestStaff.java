@@ -11,11 +11,11 @@ import staff.staffFactory;
 public class TestStaff {
 
 	@Test 
-	public void TestStaff(){
+	public void testStaff(){
 		staffFactory fact = staffFactory.getStaffFactory();
 		Manager testManager = (Manager) fact.createStaff("Manager");
 		Employee testEmp = (Employee) fact.createStaff("Employee");
-		testEmp.setValues("Daniel","Password");
+		testEmp.setValues("Kevin","fredty");
 		testManager.setValues("Thomas", "L0nd0n16");
 		assertTrue(testManager!=null);
 		assertTrue(testEmp!=null);
