@@ -16,6 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import customer.Shoppingcart;
+import payment.Bill;
 import stockmanagement.Stock;
 import stockmanagement.Stockitem;
 
@@ -172,7 +174,9 @@ public class CartGui extends JFrame implements ActionListener
 	    		int amount = Integer.parseInt(quantity.getText());
 	    		boolean inStock;
 	    		Stockitem item;
-				inStock = item.getItem(no,amount);
+				double price = 0;
+				Shoppingcart cart = new Shoppingcart();
+				cart.notifyObs();
 	    
 	    	}
 	    }
