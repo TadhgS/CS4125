@@ -60,7 +60,7 @@ public class StockEditor
 		tf_article = new JFormattedTextField();
 		tf_brand = new JFormattedTextField();
 		tf_price = new JFormattedTextField(NumberFormat.FRACTION_FIELD);
-		tf_amount = new JFormattedTextField(NumberFormat.INTEGER_FIELD);
+		tf_amount = new JFormattedTextField(NumberFormat.FRACTION_FIELD);
 		tf_artNr.setText(String.valueOf(item.getNr()));
 		tf_article.setText(item.getArticle());
 		tf_brand.setText(item.getBrand());
